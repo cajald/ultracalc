@@ -1,0 +1,20 @@
+#
+# .gitignore -- ignore shit
+#
+
+builddir/
+build/
+
+\#*
+.#*
+~*
+*~
+.DS_Store
+[Tt]humbs.db
+.idea/
+.vscode/
+*.o
+*.a
+*.so
+*.dll
+*.lib

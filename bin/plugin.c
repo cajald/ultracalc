@@ -12,7 +12,6 @@
 int
 plugin_main_impl(int argc, char** argv)
 {
-	run();
-	return 0;
+	return run(argc, argv);
 }
 

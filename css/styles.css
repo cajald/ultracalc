@@ -1,0 +1,17 @@
+/*
+ * styles.css -- styles
+ *
+ * GTK is styled with CSS, for some reason...
+ */
+
+textview {
+    background-color: #202020;
+    color: white;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+textview text {
+    background-color: #202020;
+    color: white;
+}

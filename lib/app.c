@@ -9,10 +9,35 @@
 GtkApplication* app;
 
 static void
+loadcss(void)
+{
+	GtkCssProvider* prov;
+	GdkDisplay* dpy;
+	GdkScreen* scr;
+
+	prov = gtk_css_provider_new();
+	gtk_css_provider_load_from_path(
+		prov,
+		"css/styles.css",
+		NULL
+	);
+
+	scr = gdk_screen_get_default();
+	gtk_style_context_add_provider_for_screen(
+		scr,
+		GTK_STYLE_PROVIDER(prov),
+		GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
+	);
+
+	g_object_unref(prov);
+}
+
+static void
 activate(GtkApplication *app, gpointer user_data)
 {
 	(void)user_data;
-
+	loadcss();
+	
 	GtkWidget *window;
 	GtkWidget *textview;
 
@@ -41,12 +66,13 @@ run(int argc, char** argv)
 {
 	int status;
 	
-	puts("ultracalc - hello!");
+	puts("ultracalc -- hello!");
 #if GLIB_CHECK_VERSION(2, 74, 0)
 	app = gtk_application_new(NULL, G_APPLICATION_DEFAULT_FLAGS);
 #else
 	app = gtk_application_new(NULL, G_APPLICATION_FLAGS_NONE);
 #endif
+	
 	g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
 	status = g_application_run(G_APPLICATION(app), 0, NULL);
 	g_object_unref(app);
